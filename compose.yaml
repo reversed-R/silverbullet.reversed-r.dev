@@ -1,0 +1,31 @@
+services:
+  silverbullet:
+    image: ghcr.io/silverbulletmd/silverbullet:v2
+    restart: always
+    environment:
+      - SB_USER=${SB_USER_NAME}:${SB_USER_PASSWORD}
+    volumes:
+      - ./silverbullet-space:/space
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: "traefik"
+      traefik.http.services.silverbullet.loadbalancer.server.port: 3000
+      traefik.http.services.silverbullet.loadbalancer.server.scheme: http
+      traefik.http.routers.silverbullet.rule: Host(`${SILVERBULLET_DOMAIN}`)
+      traefik.http.routers.silverbullet.entrypoints: websecure,web
+      traefik.http.routers.silverbullet.tls.certResolver: leresolver
+      traefik.http.routers.silverbullet.service: silverbullet
+    networks:
+      - traefik
+    restart: always
+
+  # To enable auto upgrades, run watchtower
+  # watchtower:
+  #   image: containrrr/watchtower
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+    
+networks:
+  traefik:
+    name: traefik
+    external: true
