@@ -3,6 +3,7 @@ services:
     image: ghcr.io/silverbulletmd/silverbullet:v2
     restart: always
     environment:
+      - SB_BASE_URL=https://${SILVERBULLET_DOMAIN}/
       - SB_USER=${SB_USER_NAME}:${SB_USER_PASSWORD}
     volumes:
       - ./silverbullet-space:/space
