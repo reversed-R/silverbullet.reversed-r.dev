@@ -27,7 +27,7 @@ services:
     labels:
       traefik.enable: "true"
       traefik.docker.network: "traefik"
-      traefik.http.routers.silverbullet-public.rule: Host(`${SILVERBULLET_DOMAIN}`) && PathPrefix(`/public`)
+      traefik.http.routers.silverbullet-public.rule: Host(`${SILVERBULLET_DOMAIN}`) && PathPrefix(`/_public`)
       traefik.http.routers.silverbullet-public.entrypoints: websecure,web
       traefik.http.routers.silverbullet-public.tls.certResolver: leresolver
       traefik.http.services.silverbullet-public.loadbalancer.server.port: 80
