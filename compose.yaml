@@ -12,10 +12,11 @@ services:
       traefik.docker.network: "traefik"
       traefik.http.services.silverbullet.loadbalancer.server.port: 3000
       traefik.http.services.silverbullet.loadbalancer.server.scheme: http
-      traefik.http.routers.silverbullet.rule: Host(`${SILVERBULLET_DOMAIN}`) && !PathPrefix(`/_public/`)
+      traefik.http.routers.silverbullet.rule: Host(`${SILVERBULLET_DOMAIN}`)
       traefik.http.routers.silverbullet.entrypoints: websecure,web
       traefik.http.routers.silverbullet.tls.certResolver: leresolver
       traefik.http.routers.silverbullet.service: silverbullet
+      traefik.http.routers.silverbullet.priority: 1
     networks:
       - traefik
 
@@ -33,6 +34,7 @@ services:
       traefik.http.routers.silverbullet-public.tls.certResolver: leresolver
       traefik.http.services.silverbullet-public.loadbalancer.server.port: 80
       traefik.http.services.silverbullet-public.loadbalancer.server.scheme: http
+      traefik.http.routers.silverbullet.priority: 10
     networks:
       - traefik
 
