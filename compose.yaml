@@ -18,6 +18,23 @@ services:
     networks:
       - traefik
 
+  public-nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      # SilverBullet が生成する静的ファイル
+      - ./silverbullet-space/_public:/usr/share/nginx/html:ro
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: "traefik"
+      traefik.http.routers.silverbullet-public.rule: Host(`${SILVERBULLET_DOMAIN}`) && PathPrefix(`/public`)
+      traefik.http.routers.silverbullet-public.entrypoints: websecure,web
+      traefik.http.routers.silverbullet-public.tls.certResolver: leresolver
+      traefik.http.services.silverbullet-public.loadbalancer.server.port: 80
+      traefik.http.services.silverbullet-public.loadbalancer.server.scheme: http
+    networks:
+      - traefik
+
   # To enable auto upgrades, run watchtower
   # watchtower:
   #   image: containrrr/watchtower
