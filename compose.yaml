@@ -34,7 +34,7 @@ services:
       traefik.http.routers.silverbullet-public.tls.certResolver: leresolver
       traefik.http.services.silverbullet-public.loadbalancer.server.port: 80
       traefik.http.services.silverbullet-public.loadbalancer.server.scheme: http
-      traefik.http.routers.silverbullet.priority: 10
+      traefik.http.routers.silverbullet-public.priority: 10
     networks:
       - traefik
 
