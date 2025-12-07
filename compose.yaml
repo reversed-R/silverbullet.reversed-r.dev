@@ -1,6 +1,6 @@
 services:
   silverbullet:
-    image: ghcr.io/silverbulletmd/silverbullet:2.1.14
+    image: ghcr.io/silverbulletmd/silverbullet:2.2.1
     restart: always
     environment:
       - SB_BASE_URL=https://${SILVERBULLET_DOMAIN}/
