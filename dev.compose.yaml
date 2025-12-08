@@ -1,0 +1,27 @@
+services:
+  silverbullet:
+    image: ghcr.io/silverbulletmd/silverbullet:2.2.1
+    restart: unless-stopped
+    environment:
+      - SB_BASE_URL=https://${SILVERBULLET_DOMAIN}/
+      - SB_USER=${SB_USER_NAME}:${SB_USER_PASSWORD}
+    volumes:
+      - ./silverbullet-space:/space
+
+  mdbook:
+    build:
+      context: .
+      dockerfile: ./mdbook/Dockerfile
+    volumes:
+      - ./silverbullet-space:/book/src/
+    restart: unless-stopped
+    environment:
+      RUST_LOG: info
+    ports:
+      - 3000:80
+
+  # To enable auto upgrades, run watchtower
+  # watchtower:
+  #   image: containrrr/watchtower
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
