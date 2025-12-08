@@ -27,7 +27,6 @@ services:
     volumes:
       - ./silverbullet-space:/book/src/
       - ./mdbook/book.toml:/book/book.toml
-      - ./mdbook/entrypoint.sh:/book/entrypoint.sh
     restart: unless-stopped
     environment:
       RUST_LOG: info

@@ -7,6 +7,10 @@ WORKDIR /book
 
 RUN mkdir src
 
+COPY ./mdbook/entrypoint.sh .
+
+RUN chmod +x ./entrypoint.sh
+
 EXPOSE 80
 
 ENTRYPOINT /book/entrypoint.sh
