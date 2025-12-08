@@ -20,12 +20,17 @@ services:
     networks:
       - traefik
 
-  public-nginx:
-    image: nginx:alpine
-    restart: always
+  mdbook:
+    build:
+      context: .
+      dockerfile: ./mdbook/Dockerfile
     volumes:
-      # SilverBullet が生成する静的ファイル
-      - ./silverbullet-space/_public:/usr/share/nginx/html:ro
+      - ./silverbullet-space:/book/src/
+      - ./mdbook/book.toml:/book/book.toml
+      - ./mdbook/entrypoint.sh:/book/entrypoint.sh
+    restart: always
+    environment:
+      RUST_LOG: info
     labels:
       traefik.enable: "true"
       traefik.docker.network: "traefik"
