@@ -37,18 +37,3 @@ jobs:
           provenance: false
           tags: |
             ghcr.io/reversed-r/${{ github.event.repository.name }}:mdbook
-
-      - name: Get Current Time (Tag Name)
-        id: tag
-        run: echo "time=$(date +%Y%m%d%H%M%S%9N)" >> $GITHUB_OUTPUT
-
-      - name: Update timestamp message
-        run: sed -i '1 s/#timestamp/#timestamp:${{ steps.tag.outputs.time }}/g' release/compose.yaml
-
-      - name: Push release/compose.yaml to release branch
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: release
-          FOLDER: release
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
