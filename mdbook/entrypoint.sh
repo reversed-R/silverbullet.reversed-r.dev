@@ -1,11 +1,11 @@
 #!/bin/sh
 
-find src -name '*.md' | sort > tmp
+find src -name 'src/public/*.md' | sort > tmp
 echo "# Summary" > src/SUMMARY.md
 
 while read f; do
-  # remove leading "src/"
-  rel="${f#src/}"
+  # remove leading "src/public/"
+  rel="${f#src/public/}"
 
   name=$(basename "$rel" .md)
   echo "* [$name]($rel)" >> src/SUMMARY.md
