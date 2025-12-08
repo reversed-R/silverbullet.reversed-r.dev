@@ -1,6 +1,6 @@
 #!/bin/sh
 
-find src -name 'src/*.md' | sort > tmp
+find src -name 'src/**/*.md' | sort > tmp
 echo "# Summary" > src/SUMMARY.md
 
 while read f; do
