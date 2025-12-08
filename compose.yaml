@@ -26,7 +26,6 @@ services:
       dockerfile: ./mdbook/Dockerfile
     volumes:
       - ./silverbullet-space:/book/src/
-      - ./mdbook:/book/
     restart: unless-stopped
     environment:
       RUST_LOG: info

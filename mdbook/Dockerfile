@@ -7,6 +7,8 @@ WORKDIR /book
 
 RUN mkdir src
 
+COPY ./mdbook/book.toml /book
+
 COPY ./mdbook/entrypoint.sh /book
 
 RUN chmod +x /book/entrypoint.sh
