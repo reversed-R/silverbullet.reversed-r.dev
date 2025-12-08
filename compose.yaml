@@ -1,3 +1,5 @@
+#timestamp:
+
 services:
   silverbullet:
     image: ghcr.io/silverbulletmd/silverbullet:2.2.1
@@ -21,9 +23,7 @@ services:
       - traefik
 
   mdbook:
-    build:
-      context: .
-      dockerfile: ./mdbook/Dockerfile
+    image: ghcr.io/reversed-r/silverbullet.reversed-r.dev:mdbook
     volumes:
       - ./silverbullet-space/public:/book/src/
     restart: unless-stopped
