@@ -7,7 +7,7 @@ WORKDIR /book
 
 RUN mkdir src
 
-COPY ./mdbook/entrypoint.sh /book/entrypoint.sh
+COPY ./mdbook/entrypoint.sh /book
 
 RUN chmod +x /book/entrypoint.sh
 
