@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 find src -name '*.md' | sort > tmp
 echo "# Summary" > src/SUMMARY.md
