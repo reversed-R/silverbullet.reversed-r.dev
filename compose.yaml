@@ -1,7 +1,7 @@
 services:
   silverbullet:
     image: ghcr.io/silverbulletmd/silverbullet:2.2.1
-    restart: always
+    restart: unless-stopped
     environment:
       - SB_BASE_URL=https://${SILVERBULLET_DOMAIN}/
       - SB_USER=${SB_USER_NAME}:${SB_USER_PASSWORD}
@@ -28,13 +28,13 @@ services:
       - ./silverbullet-space:/book/src/
       - ./mdbook/book.toml:/book/book.toml
       - ./mdbook/entrypoint.sh:/book/entrypoint.sh
-    restart: always
+    restart: unless-stopped
     environment:
       RUST_LOG: info
     labels:
       traefik.enable: "true"
       traefik.docker.network: "traefik"
-      traefik.http.routers.silverbullet-public.rule: Host(`${SILVERBULLET_DOMAIN}`) && PathPrefix(`/_public/`)
+      traefik.http.routers.silverbullet-public.rule: Host(`${SILVERBULLET_PUBLISHMENT_DOMAIN}`)
       traefik.http.routers.silverbullet-public.entrypoints: websecure,web
       traefik.http.routers.silverbullet-public.tls.certResolver: leresolver
       traefik.http.services.silverbullet-public.loadbalancer.server.port: 80
