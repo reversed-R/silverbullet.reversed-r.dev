@@ -1,5 +1,10 @@
 FROM rust:1.88-slim
 
+# inotify-tools install
+RUN apt-get update \
+ && apt-get install -y inotify-tools \
+ && rm -rf /var/lib/apt/lists/*
+
 # mdBook install
 RUN cargo install mdbook mdbook-autosummary
 

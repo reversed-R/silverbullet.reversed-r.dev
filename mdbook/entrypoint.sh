@@ -1,16 +1,15 @@
 #!/bin/sh
+set -e
 
-find src -name '*.md' | sort > tmp
-echo "# Summary" > src/SUMMARY.md
+generate_summary () {
+  mdbook-autosummary
+}
 
-while read f; do
-  # remove leading "src/"
-  rel="${f#src/}"
+generate_summary
 
-  name=$(basename "$rel" .md)
-  echo "* [$name]($rel)" >> src/SUMMARY.md
-done < tmp
+mdbook serve -n 0.0.0.0 -p 80 &
 
-rm tmp
-
-mdbook serve -n 0.0.0.0 -p 80
+while inotifywait -r -e create -e delete -e moved_to -e moved_from src
+do
+  generate_summary
+done
