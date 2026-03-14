@@ -6,7 +6,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # mdBook install
-RUN cargo install mdbook mdbook-autosummary
+RUN cargo install mdbook
 
 WORKDIR /book
 
